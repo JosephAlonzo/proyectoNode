@@ -1,16 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var db=require("../conexion/conexion");
+const express = require('express');
 
-/* GET productos. */
-router.get('/', function(req, res, next) {
-    
-    db.query("SELECT * FROM productos", function(err, resultados){
-        // console.log(resultados);
-        res.render('productos', { title: 'Nuestros productos', libros: resultados });
-    });
+const ProductosController = require('../Controllers/ProductosController');
 
-});
+const router = express.Router();
 
+router.get('/', ProductosController.getProductos);
+router.post('/agregar-productos', ProductosController.postProductos);
+router.post('/update-productos', ProductosController.updateProductos);
+router.post('/delete-productos', ProductosController.deleteProductos);
 
 module.exports = router;

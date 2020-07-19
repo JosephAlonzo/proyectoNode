@@ -9,6 +9,12 @@ var usersRouter = require('./routes/users');
 var productosRouter = require('./routes/productos');
 var adminRouter = require('./routes/admin');
 
+// Databases
+const sequelize = require('./conexion/database');
+
+// Modelos
+const Productos = require('./models/Productos');
+
 var app = express();
 
 // view engine setup
@@ -26,20 +32,28 @@ app.use('/users', usersRouter);
 app.use('/productos', productosRouter);
 app.use('/admin', adminRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// // catch 404 and forward to error handler
+// app.use(function (req, res, next) {
+//   next(createError(404));
+// });
+
+sequelize
+  .sync()
+  .then((res) => {
+    console.log(res);
+    app.listen(4000);
+  })
+  .catch((err) => console.log(err));
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// app.use(function (err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
 
 module.exports = app;
