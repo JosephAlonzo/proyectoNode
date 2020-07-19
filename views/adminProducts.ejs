@@ -49,11 +49,11 @@
             
             </div>
         </div>
-            <!-- Edit Modal HTML -->
+            <!-- add Modal HTML -->
             <div id="addEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="/productos/agregar-productos" method="post">
+                        <form action="/admin/add-productos" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Agregar libro</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -102,7 +102,7 @@
              <div id="editEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form enctype="multipart/form-data" action="/agregar-productos"  method="post">	
+                        <form enctype="multipart/form-data" action="/admin/update-productos"  method="post">	
                             <div class="modal-header">						
                                 <h4 class="modal-title">Modificar libro</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -143,10 +143,10 @@
                 </div>
             </div> -->
             <!-- Delete Modal HTML -->
-            <!-- <div id="deleteEmployeeModal" class="modal fade">
+            <div id="deleteEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action=""  method="post">
+                        <form action="/admin/delete-productos"  method="post">
                             <input type="hidden" name="id" id="IdDeleteBook">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Eliminar libro</h4>
@@ -192,6 +192,6 @@
     }
 
     
-</script>
+</script> 
 
 <%- include layouts/footer.ejs %>
