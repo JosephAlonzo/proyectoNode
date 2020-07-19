@@ -1,0 +1,28 @@
+<%- include layouts/header.ejs %>
+    <div class="container">
+      <h1><%= title %></h1>
+      <div class="row">
+        <% for(var libro=0 ; libro<libros.length; libro++) { %>
+          
+          <div class="col-sm-4" style="width: 18rem;"> 
+            <div class="card"  style="height: 500px;"> 
+              <img height="317" class="card-img-top" src="<%= libros[libro].imagen%>" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"><%= libros[libro].titulo%></h5>
+                <p class="card-text"> <%= libros[libro].descripcion%> </p>
+                <p class="card-text"> <%= libros[libro].autor%> </p>
+                <h5>$<%= libros[libro].precio%> </h5>
+                <a href="#" class="btn btn-primary">Agregar al carrito</a>
+              </div>
+            </div>
+          </div>
+
+        <%}%>
+
+      </div>
+
+    </div>
+
+<%- include layouts/footer.ejs %>
+
+  

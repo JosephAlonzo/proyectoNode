@@ -1,0 +1,40 @@
+<%- include layouts/headerAdmin.ejs %>
+<div class="container">
+    <h1><%= title %></h1>
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Información <b>usuarios</b></h2>
+                </div>
+                <div class="col-sm-6">
+                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar nuevo usuario</span></a>			
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0 ; i <buys.length; i++) { %>
+                    <tr>
+                        <td><%= buys[i].id%></td>
+                        <td><%= buys[i].producto%></td>
+                        <td><%= buys[i].cantidad%></td>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>
+        
+        </div>
+    </div>
+        
+        
+
+
+<%- include layouts/footer.ejs %>
