@@ -14,7 +14,8 @@ const Ventas_producto  = sequelize.define('ventas_productos', {
   precio: Sequelize.DOUBLE,
   imagen: Sequelize.TEXT,
   autor: Sequelize.STRING,
-  tecnologia: Sequelize.STRING
+  tecnologia: Sequelize.STRING,
+  activo: Sequelize.INTEGER
 }, 
 {
   freezeTableName: true,

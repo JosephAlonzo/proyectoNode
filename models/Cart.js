@@ -14,6 +14,7 @@ const Cart = sequelize.define('cart', {
   titulo: Sequelize.STRING,
   precio: Sequelize.STRING,
   autor: Sequelize.STRING,
+  imagen: Sequelize.TEXT,
 });
 
 module.exports = Cart;

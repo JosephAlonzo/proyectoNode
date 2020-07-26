@@ -1,13 +1,10 @@
 var express = require('express');
-const Productos = require('../models/Productos');
 var router = express.Router();
+const CartController = require('../Controllers/CartController');
 
 const redirectLogin = (req, res, next) =>{
   if(!req.session.user){
       res.redirect('/login');
-  }
-  else if(req.session.user[0].tipo == 0){
-      res.redirect('/');
   }
   else{
       next();
@@ -15,16 +12,9 @@ const redirectLogin = (req, res, next) =>{
 }
 
 /* GET home page. */
-router.get('/', redirectLogin, function(req, res, next) {
-  Productos.findAll()
-    .then((resultados) => {
-      res.render('cart', {
-        title: 'carrito',
-        libros: resultados,
-      });
-    })
-    .catch((err) => console.log(err));
-});
+router.get('/', redirectLogin, CartController.show);
 
+router.get('/add/:id', redirectLogin, CartController.add);
+router.get('/delete/:id',redirectLogin, CartController.delete);
 
 module.exports = router;

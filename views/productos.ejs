@@ -15,7 +15,7 @@
           <h5>$<%= libros[libro].precio%> </h5>
           <a href="/comments/show/<%=libros[libro].id%>" class="btn btn-primary">Ver producto</a>
           <%if(libros[libro].activo){%>
-            <button class="btn btn-primary" id="<%=libros[libro].id%>" onclick='save(this)'>Agregar al carrito</button>
+            <a class="btn btn-primary" href="/carrito/add/<%=libros[libro].id%>">Agregar al carrito</a>
           <%}else{%>
             <button class="btn btn-secondary" disabled>Desactivado</button>
           <%}%>

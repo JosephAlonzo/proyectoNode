@@ -1,22 +1,26 @@
 <%- include layouts/header.ejs %>
 
 <div class="container">
+    <% if ( libros.length == 0) {%>
+        <h2>carrito vacio</h2>
+    <%}else {%>
     <div class="row">
         <div class="col-md-8">
-            
-            <% for(var libro=0 ; libro < 5; libro++) { %>
+            <% var subtotal = 0; %>
+            <% for(var libro=0 ; libro < libros.length; libro++) { %>
+            <% subtotal = subtotal + parseInt(libros[libro].precio) %>
                 
             <div class="row cart-section">  
                 <div class="col-md-3">
-                   <p class="text-center"> <img src="/images/ivMCRQB6Kpluq0SlnD3n4TI0.png" alt="imagebook" class="imagecart"></p>
+                   <p class="text-center"> <img src="/images/<%=libros[libro].imagen%>" alt="imagebook" class="imagecart"></p>
                 </div>
                 <div class="col-md-3">
                     <h2>Nombre del libro</h2>
-                    <p>{{nombre del libro }}<span>Por {{autor}}</span></p>
+                    <p><%=libros[libro].titulo%><span> Por <%= libros[libro].autor%></span></p>
                 </div>
                 <div class="col-md-2">
                     <h2>Precio</h2>
-                    <p>${{precio}}</p>
+                    <p>$<%= libros[libro].precio%></p>
                 </div>
                 <div class="col-md-2 text-center" >
                         <h2>Cantidad</h2>
@@ -24,7 +28,7 @@
                 </div>
                 <div class="col-md-2 text-center">
                     <h2>Acciones</h2>
-                    <a href="" id="less" ><i class="fas fa-trash-alt text-danger"></i></a></p>
+                    <a href="/carrito/delete/<%=libros[libro].id%>" id="less" ><i class="fas fa-trash-alt text-danger"></i></a></p>
                 </div>
             </div>
             <%}%>
@@ -33,14 +37,16 @@
 
 
         <div class="col-md-3 cart-pay ml-2">
-            <h2>Subtotal: $600</h2>
+            <h2>Subtotal: $<%=subtotal%></h2>
             <p>
                 <ul>
-                <li> {{Nombre}}: ${{precio}} </li>
+                <% for(var i=0 ; i < libros.length; i++) { %>
+                    <li> <%=libros[i].titulo%>: $<%=libros[i].precio%></li>
+                <%}%>
                 </ul>
             </p>
             <button type="button" class="btn btn-outline-warning btnSeeBook btn-block">Pagar</button>
         </div>
     </div>
-
+    <%}%>
 <%- include layouts/footer.ejs %>
