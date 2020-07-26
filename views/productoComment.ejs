@@ -1,0 +1,79 @@
+<%-include layouts/header.ejs %>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-12" style="width: 18rem;">
+            <div class="card" style="height: 600px;">
+            <img height="317" class="card-img-top" src="/images/<%=libro.imagen%>" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%=libro.titulo%></h5>
+                <p class="card-text"> <%= libro.descripcion%> </p>
+                <p class="card-text"> <%= libro.autor%> </p>
+                <p class="card-text"> <%= libro.tecnologia%> </p>
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="comments-container mt-5">
+        <h1>Comentarios</h1>
+
+        <ul id="comments-list" class="comments-list">
+            <% for(var i=0 ; i < comments.length; i++) { %>
+                <li>
+                    <div class="comment-main-level">
+                        <!-- Avatar -->
+                        <div class="comment-avatar"><img src="https://www.eyedocs.co.uk/components/com_community/assets/user-anon.png" alt=""></div>
+                        <!-- Contenedor del Comentario -->
+                        <div class="comment-box">
+                            <div class="comment-head">
+                                <h6 class="comment-name by-author"><%=comments[i].email%></h6>
+                                <span>Escrito: <%=comments[i].createdAt%></span>
+                            
+                            </div>
+                            <div class="comment-content">
+                                <%=comments[i].comment%>
+                            </div>
+                        </div>
+                    </div>
+                
+                </li>
+            <%}%>
+        
+        
+        </ul>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-sm-12">
+            <form action="/comments/add" method="post">
+                <input type="hidden" name="id" value="<%=libro.id%>">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Comentario</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
+                </div>
+
+                <input type="submit" value="Enviar" class="btn btn-primary">
+
+            </form>
+        </div>
+    </div>
+    
+
+
+
+</div>
+
+
+<%- include layouts/footer.ejs %>
+
+
+
+
+

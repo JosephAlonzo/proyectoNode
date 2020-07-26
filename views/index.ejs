@@ -6,10 +6,38 @@
         <hr class="my-4">
         <p>Usando Node Js y MYSQL</p>
         <p class="lead">
-          <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </p>
       </div>
+    
+
+    <div class="row">
+      <% for(var libro=0 ; libro < libros.length; libro++) { %>
+  
+      <div class="col-sm-4" style="width: 18rem;">
+        <div class="card" style="height: 600px;">
+          <img height="317" class="card-img-top" src="/images/<%=libros[libro].imagen%>" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><%= libros[libro].titulo%></h5>
+            <p class="card-text"> <%= libros[libro].descripcion%> </p>
+            <p class="card-text"> <%= libros[libro].autor%> </p>
+            <p class="card-text"> <%= libros[libro].tecnologia%> </p>
+            <p class="card-text"> Cantidad vendida: <%= libros[libro].cantidad%> </p>
+            <h5>$<%= libros[libro].precio%> </h5>
+            <a href="/comments/show/<%=libros[libro].id%>" class="btn btn-primary">Ver producto</a>
+            <%if(libros[libro].activo){%>
+              <a href="#" class="btn btn-primary">Agregar al carrito</a>
+            <%}else{%>
+              <button class="btn btn-secondary" disabled>Desactivado</button>
+            <%}%>
+          </div>
+        </div>
+      </div>
+  
+      <%}%>
+  
     </div>
+
+  </div>
 
 <%- include layouts/footer.ejs %>
 

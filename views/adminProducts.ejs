@@ -1,12 +1,25 @@
 <%- include layouts/headerAdmin.ejs %>
 <div class="container">
-  <h1><%= title %></h1>
+  <div class="row">
+    <div class="col-7">
+        <h1><%= title %></h1>
+    </div>
+    <div class="col-5 ml-auto">
+        <form action="/admin/productos/findByName" method="POST" class="form-inline">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mr-3">Nombre: </label>
+              <input type="text" class="form-control mr-2" id="exampleInputEmail1" name="name" >
+            </div>
+            <button type="submit" class="btn btn-info">Buscar</button>
+        </form>
+    </div>
+  </div>
   <div class="table-wrapper">
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
           <h2><b>Libros</b></h2>
-        </div>
+        </div>        
         <div class="col-sm-6">
           <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>
             <span>Agregar nuevo libro</span></a>
@@ -23,6 +36,8 @@
           <th>Precio</th>
           <th>Tecnología</th>
           <th>Imagen</th>
+          <th>ZIP</th>
+          <th>Estado</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -35,11 +50,13 @@
           <td><textarea class="form-control textarea" rows="3" readonly><%=libros[i].descripcion%></textarea></td>
           <td><%= libros[i].precio%></td>
           <td><%= libros[i].tecnologia%></td>
-          <td> <img class="imgTable " src="<%=libros[i].imagen%>" alt="Sin imagen del libro"></td>
+          <td> <img class="imgTable " src="/images/<%=libros[i].imagen%>" alt="Sin imagen del libro"></td>
+          <td><a href="/images/<%= libros[i].zip%>">Archivo</a></td>
+          <td><% if(libros[i].activo == 1) {%>Activo<%}else{%>Desactivado<%}%></td>
           <td>
             <a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="changeEditB(this)"><i
                 class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" onclick='changeB(<%=libros[i].id%>)'><i
+            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" id="<%= libros[i].id%>" onclick='changeB(this)'><i
                 class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
           </td>
         </tr>
@@ -53,7 +70,7 @@
             <div id="addEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="/admin/add-productos" method="post">
+                        <form action="/admin/add-productos" enctype="multipart/form-data" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Agregar libro</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -81,9 +98,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Foto</label>
-                                    <input type="text" class="form-control" name="foto">
-                                    <!-- <input type="file" class="form-control" name="foto" required> -->
-                                </div>				
+                                    <!-- <input type="text" class="form-control" name="foto"> -->
+                                    <input type="file" class="form-control" name="foto" required> 
+                                </div>
+                                <div class="form-group">
+                                    <label>Zip</label>
+                                    <!-- <input type="text" class="form-control" name="foto"> -->
+                                    <input type="file" class="form-control" name="zip" required> 
+                                </div>	
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect2">Estado</label>
+                                    <select class="form-control" name="activo">
+                                        <option value="1">Activo</option>
+                                        <option value="0">Desactivado</option>
+                                    </select>
+                                </div>		
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Anular">
@@ -102,7 +131,7 @@
              <div id="editEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form enctype="multipart/form-data" action="/admin/update-productos"  method="post">	
+                        <form action="/admin/update-productos"  enctype="multipart/form-data"  method="post">	
                             <div class="modal-header">						
                                 <h4 class="modal-title">Modificar libro</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -132,7 +161,21 @@
                                     <div class="form-group">
                                         <label>Foto</label>
                                         <input type="file" class="form-control" name="foto" id="foto">
-                                    </div>		
+                                        <!-- <input type="text" class="form-control" name="foto"> -->
+                                    </div>	
+
+                                    <div class="form-group">
+                                        <label>Zip</label>
+                                        <input type="file" class="form-control" name="zip" id="zip" >
+                                        <!-- <input type="text" class="form-control" name="foto"> -->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Estado</label>
+                                        <select class="form-control" name="activo" id="activo">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Desactivado</option>
+                                        </select>
+                                    </div>	
                                 </div>
                                 <div class="modal-footer">
                                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Anular">
@@ -141,7 +184,7 @@
                         </form>
                     </div>
                 </div>
-            </div> -->
+            </div> 
             <!-- Delete Modal HTML -->
             <div id="deleteEmployeeModal" class="modal fade">
                 <div class="modal-dialog">
@@ -172,8 +215,8 @@
 <script type="text/javascript">
     
     function changeB(value){
-        console.log(value);
-        $("#IdDeleteBook").val(value);
+        id = $(value).attr('id');
+        $("#IdDeleteBook").val(id);
     }
     function changeEditB(el){
         otro =$(el).parent().parent().children();
@@ -181,14 +224,19 @@
         otro.each(function() {
             values.push($( this ).text() )
         });
-        
+        console.log(values[8]);
         $("#idEditBook").val(values[0]);
         $("#titulo").val(values[1]);
         $("#autor").val(values[2]);
         $("#descripcion").val(values[3]);
         $("#precio").val(values[4]);
         $("#tecnologia").val(values[5]);
-        $("#foto").val(values[6]);
+        if(values[8] == "Activo"){
+            $("#activo").val('1');
+        }else{
+            $("#activo").val('0');
+        }
+        
     }
 
     

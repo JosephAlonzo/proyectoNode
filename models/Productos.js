@@ -11,10 +11,12 @@ const Productos = sequelize.define('productos', {
   },
   titulo: Sequelize.STRING,
   descripcion: Sequelize.STRING,
-  precio: Sequelize.INTEGER,
+  precio: Sequelize.DOUBLE,
   imagen: Sequelize.TEXT,
   autor: Sequelize.STRING,
   tecnologia: Sequelize.STRING,
+  zip: Sequelize.TEXT,
+  activo: Sequelize.INTEGER
 });
 
 module.exports = Productos;

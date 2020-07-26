@@ -5,22 +5,29 @@
     <% for(var libro=0 ; libro < libros.length; libro++) { %>
 
     <div class="col-sm-4" style="width: 18rem;">
-      <div class="card" style="height: 500px;">
-        <img height="317" class="card-img-top" src="<%= libros[libro].imagen%>" alt="Card image cap">
+      <div class="card" style="height: 550px;">
+        <img height="317" class="card-img-top" src="/images/<%=libros[libro].imagen%>" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title"><%= libros[libro].titulo%></h5>
           <p class="card-text"> <%= libros[libro].descripcion%> </p>
           <p class="card-text"> <%= libros[libro].autor%> </p>
+          <p class="card-text"> <%= libros[libro].tecnologia%> </p>
           <h5>$<%= libros[libro].precio%> </h5>
-          <a href="#" class="btn btn-primary">Agregar al carrito</a>
+          <a href="/comments/show/<%=libros[libro].id%>" class="btn btn-primary">Ver producto</a>
+          <%if(libros[libro].activo){%>
+            <button class="btn btn-primary" id="<%=libros[libro].id%>" onclick='save(this)'>Agregar al carrito</button>
+          <%}else{%>
+            <button class="btn btn-secondary" disabled>Desactivado</button>
+          <%}%>
         </div>
       </div>
     </div>
 
     <%}%>
 
-      </div>
+  </div>
+</div>
 
-    </div>
+
 
 <%- include layouts/footer.ejs %>

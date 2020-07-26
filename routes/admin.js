@@ -1,52 +1,42 @@
 var express = require('express');
 var router = express.Router();
 const ProductosController = require('../Controllers/ProductosController');
-// var db = require('../conexion/conexion');
+const UserController = require('../Controllers/UserController');
+const SalesController = require('../Controllers/SalesController');
+var multipart = require("connect-multiparty")
+var md_ = multipart({uploadDir:'./public/images'})
 
-// /* GET home page. */
-// router.get('/', function (req, res, next) {
-//   db.query('SELECT * FROM productos', function (err, resultados) {
-//     console.log(resultados);
-//     res.render('adminProducts', { title: 'Productos', libros: resultados });
-//   });
-// });
+const redirectLogin = (req, res, next) =>{
+    if(!req.session.user){
+        res.redirect('/login');
+    }
+    else if(req.session.user[0].tipo == 0){
+        res.redirect('/');
+    }
+    else{
+        next();
+    }
+}
 
-// router.get('/productos', function (req, res, next) {
-//   db.query('SELECT * FROM productos', function (err, resultados) {
-//     console.log(resultados);
-//     res.render('adminProducts', { title: 'Productos', libros: resultados });
-//   });
-// });
+router.post('/login', UserController.login);
 
-// router.get('/usuarios', function (req, res, next) {
-//   db.query('SELECT * FROM users', function (err, resultados) {
-//     console.log(resultados);
-//     res.render('adminUsers', { title: 'Usuarios', users: resultados });
-//   });
-// });
-
-// router.get('/ventas', function (req, res, next) {
-//   db.query('SELECT * FROM ventas', function (err, resultados) {
-//     console.log(resultados);
-//     res.render('adminBuys', { title: 'Ventas', buys: resultados });
-//   });
-// });
-
-router.get('/', ProductosController.getAdminProductos);
-router.get('/productos', ProductosController.getAdminProductos);
-router.post('/add-productos', ProductosController.addProductos);
-router.post('/update-productos', ProductosController.updateProductos);
+router.get('/',redirectLogin, ProductosController.getAdminProductos);
+router.get('/productos',redirectLogin, ProductosController.getAdminProductos);
+router.post('/productos/findByName', ProductosController.findProductosByName);
+router.post('/add-productos',md_, ProductosController.addProductos);
+router.post('/update-productos',md_, ProductosController.updateProductos);
 router.post('/delete-productos', ProductosController.deleteProductos);
 
-router.get('/users', ProductosController.getUsers);
-router.post('/add-users', ProductosController.addUsers);
-router.post('/update-users', ProductosController.updateUsers);
-router.post('/delete-users', ProductosController.deleteUsers);
+router.get('/usuarios',redirectLogin, UserController.getUsers);
+router.post('/add-users', UserController.addUsers);
+router.post('/update-users', UserController.updateUsers);
+router.post('/delete-users', UserController.deleteUsers);
 
-router.get('/buys', ProductosController.getBuys);
-router.post('/add-buys', ProductosController.addBuys);
-router.post('/update-buys', ProductosController.updateBuys);
-router.post('/delete-buys', ProductosController.deleteBuys);
+router.get('/ventas',redirectLogin, SalesController.getSales);
+router.post('/ventas', SalesController.getSalesDate);
+router.post('/add-sales', SalesController.addSales);
+router.post('/update-sales', SalesController.updateSales);
+router.post('/delete-sales', SalesController.deleteSales);
 
 
 module.exports = router;

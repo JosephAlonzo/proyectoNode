@@ -295,51 +295,7 @@ header{
 	border-radius: 5px;
 	padding: 15px;
 }
-.imagecart{
-	width: 50%;
-	height: 150px;
-}
-.cart-section{
-	border-bottom: 1px solid #DDE0E5;
-}
-.cart-section h2{
-	font-size: 18px;
-	font-weight: 600;
-	padding-bottom: 5px;
-	border-bottom: 1px solid #DDE0E5;
-}
-.cart-section div{
-	padding-right: 0;
-	padding-left: 0;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-top:50px;
-}
-.cart-section div p{
-	padding-left: 10px;
-	margin:auto;
-}
-.cart-pay{
-	position: fixed;
-	right: 0;
-	border: 2px solid #DDE0E5;
-	border-radius: 5px;
-	padding: 15px;
-	margin-top:45px;
-	margin-right: 10px;
-}
-.cart-pay h2{
-	font-size: 18px;
-	font-weight: 600;
-}
-.cart-pay h3{
-	font-size: 16px;
-	font-weight: 400;
-}
-.cart-pay ul{
-	list-style: none;
-	padding-left: 0;
-}
+
 .see-book h1{
 	font-size: 18px;
 	font-weight: 600;

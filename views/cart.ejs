@@ -1,0 +1,46 @@
+<%- include layouts/header.ejs %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            
+            <% for(var libro=0 ; libro < 5; libro++) { %>
+                
+            <div class="row cart-section">  
+                <div class="col-md-3">
+                   <p class="text-center"> <img src="/images/ivMCRQB6Kpluq0SlnD3n4TI0.png" alt="imagebook" class="imagecart"></p>
+                </div>
+                <div class="col-md-3">
+                    <h2>Nombre del libro</h2>
+                    <p>{{nombre del libro }}<span>Por {{autor}}</span></p>
+                </div>
+                <div class="col-md-2">
+                    <h2>Precio</h2>
+                    <p>${{precio}}</p>
+                </div>
+                <div class="col-md-2 text-center" >
+                        <h2>Cantidad</h2>
+                        <p >1</p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <h2>Acciones</h2>
+                    <a href="" id="less" ><i class="fas fa-trash-alt text-danger"></i></a></p>
+                </div>
+            </div>
+            <%}%>
+
+        </div>
+
+
+        <div class="col-md-3 cart-pay ml-2">
+            <h2>Subtotal: $600</h2>
+            <p>
+                <ul>
+                <li> {{Nombre}}: ${{precio}} </li>
+                </ul>
+            </p>
+            <button type="button" class="btn btn-outline-warning btnSeeBook btn-block">Pagar</button>
+        </div>
+    </div>
+
+<%- include layouts/footer.ejs %>

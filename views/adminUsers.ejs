@@ -18,6 +18,7 @@
                     <th>ID</th>
                     <th>Email</th>
                     <th>Contraseña</th>
+                    <th>Tipo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -25,11 +26,12 @@
                 <% for(var i=0 ; i <users.length; i++) { %>
                     <tr>
                         <td><%= users[i].id%></td>
-                        <td><%= users[i].correo%></td>
-                        <td><%= users[i].contraseña%></td>
+                        <td><%= users[i].email%></td>
+                        <td><%= users[i].password%></td>
+                        <td><% if(users[i].tipo == 1){%>Administrador<%}else{%>Usuario<%}%></td>
                         <td>
                             <a href="#editEmployeeModal" class="edit" data-toggle="modal" onclick="changeEditB(this)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" onclick='changeB(<%=users[i].id%>)'><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="#deleteEmployeeModal" id="<%=users[i].id%>" class="delete" data-toggle="modal" onclick='changeB(this)'><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
                 <%}%>
@@ -42,7 +44,7 @@
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form enctype="multipart/form-data" action="" method="post">
+                    <form action="/admin/add-users" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Agregar usuario</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -56,6 +58,13 @@
                                 <label>Contraseña</label>
                                 <input type="password" class="form-control" name="password" required>
                             </div>			
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Tipo</label>
+                                <select class="form-control" name="tipo">
+                                    <option value="1">Administrador</option>
+                                    <option value="0">Usuario</option>
+                                </select>
+                            </div>	
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Anular">
@@ -69,7 +78,7 @@
         <div id="editEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form enctype="multipart/form-data" action=""  method="post">	
+                    <form action="/admin/update-users"  method="post">	
                         <div class="modal-header">						
                             <h4 class="modal-title">Modificar usuario</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -85,6 +94,10 @@
                                     <label>Contraseña</label>
                                     <input type="password" class="form-control" name="password" id="password" required>
                                 </div>		
+                                <select class="form-control" name="tipo">
+                                    <option value="1">Administrador</option>
+                                    <option value="0">Usuario</option>
+                                </select>
                             </div>
                             <div class="modal-footer">
                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Anular">
@@ -98,7 +111,7 @@
         <div id="deleteEmployeeModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action=""  method="post">
+                    <form action="/admin/delete-users"  method="post">
                         <input type="hidden" name="id" id="IdDeleteUser">
                         <div class="modal-header">						
                             <h4 class="modal-title">Eliminar usuario</h4>
@@ -123,8 +136,8 @@
 <script type="text/javascript">
     
     function changeB(value){
-        console.log(value);
-        $("#IdDeleteUser").val(value);
+        id = $(value).attr('id');
+        $("#IdDeleteUser").val(id);
     }
     function changeEditB(el){
         otro =$(el).parent().parent().children();
@@ -136,6 +149,11 @@
         $("#idEditUser").val(values[0]);
         $("#email").val(values[1]);
         $("#password").val(values[2]);
+        if(values[3] == "Activo"){
+            $("#tipo").val('1');
+        }else{
+            $("#tipo").val('0');
+        }
     }
 
     
