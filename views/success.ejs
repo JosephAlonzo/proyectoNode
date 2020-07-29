@@ -1,0 +1,17 @@
+<%- include layouts/header.ejs %>
+
+<div class="container">
+    <h1 class="text-center mt-4">Compra completa </h1>
+    <p class="text-center mt-3"> <img src="/images/success.png" alt="" style="width: 200px;"></p>
+    
+    <h2 class="text-center">Mis manuales</h2>
+    <ul class="text-center">
+        <% for(var i=0 ; i < libros.length; i++) { %>
+            <li>
+                <a href="/paypal/descargar/<%=libros[i].id%>">descargar <%=libros[i].titulo%></a>
+            </li>  
+        <%}%> 
+    </ul>
+</div>
+
+<%- include layouts/footer.ejs %>

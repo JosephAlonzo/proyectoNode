@@ -8,8 +8,8 @@ exports.show = (req, res) => {
     })
     .then((resultados) => {
         res.render('cart', {
-        title: 'carrito',
-        libros: resultados,
+          title: 'carrito',
+          libros: resultados,
         });
     })
     .catch((err) => console.log(err));

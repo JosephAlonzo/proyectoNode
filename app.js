@@ -58,11 +58,11 @@ app.use('/comments', commentRouter);
 // });
 
 //TODO inicializar paypal
-paypal.configure({
-  'mode': 'sandbox',
-  'client_id': 'AcMKfRQSF9pEdf-R3NS8BPqEG03wqVx3lcbOfcjKDjlgGT7BHgrt7Wo9fG_AUwApnHvr2bfKPycOGncg',
-  'client_secret': 'EOJs1WzHshExPGOi3EKf7CTNytIOrH3X9mCtQXCJZWsxsYoH1tSty6EIr8kd-foyz-NxP6X9l12sKOy6'
-});
+// paypal.configure({
+//   'mode': 'sandbox',
+//   'client_id': 'AcMKfRQSF9pEdf-R3NS8BPqEG03wqVx3lcbOfcjKDjlgGT7BHgrt7Wo9fG_AUwApnHvr2bfKPycOGncg',
+//   'client_secret': 'EOJs1WzHshExPGOi3EKf7CTNytIOrH3X9mCtQXCJZWsxsYoH1tSty6EIr8kd-foyz-NxP6X9l12sKOy6'
+// });
 
 
 

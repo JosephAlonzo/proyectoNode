@@ -23,8 +23,7 @@ exports.getSalesDate = (req, res) => {
     ventas_producto_completo.findAll({
         where:{ 
             createdAt: {
-                [Op.gt]: new Date(date1),
-                [Op.lt]: new Date(date2)
+                [Op.between]: [ new Date(date1) , new Date(date2 )]
             }
         }
     })

@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 
 const sequelize = require('../conexion/database');
 
+
 const Productos = sequelize.define('productos', {
   id: {
     type: Sequelize.INTEGER,

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/945e45db-3348-490b-b4fe-65f322e72b17/resourceGroups/josephdanteca/providers/Microsoft.Web/sites/josephdanteca",
+    "appService.deploySubpath": "."
+}

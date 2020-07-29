@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <% var subtotal = 0; %>
             <% for(var libro=0 ; libro < libros.length; libro++) { %>
-            <% subtotal = subtotal + parseInt(libros[libro].precio) %>
+            <% subtotal = subtotal + parseFloat(libros[libro].precio) %>
                 
             <div class="row cart-section">  
                 <div class="col-md-3">
@@ -38,14 +38,36 @@
 
         <div class="col-md-3 cart-pay ml-2">
             <h2>Subtotal: $<%=subtotal%></h2>
+            <form action="/paypal/pagar" method="post">
             <p>
                 <ul>
-                <% for(var i=0 ; i < libros.length; i++) { %>
-                    <li> <%=libros[i].titulo%>: $<%=libros[i].precio%></li>
-                <%}%>
-                </ul>
+                    <% json = null%>
+                    <% for(var i=0 ; i < libros.length; i++) { %>
+                        <% if (json == null){%>
+                            <% json =  `{ 
+                                "name": "`+ libros[i].titulo +`",
+                                "sku": `+ libros[i].id_producto +`,
+                                "price": `+ libros[i].precio +`,
+                                "currency": \"MXN\",
+                                "quantity": 1
+                            },`;%>
+                        <%}else{%>
+                            <% var json = json + `{ 
+                                "name": "`+ libros[i].titulo +`",
+                                "sku": `+ libros[i].id_producto +`,
+                                "price": `+ libros[i].precio +`,
+                                "currency": \"MXN\",
+                                "quantity": 1
+                            },`; %>
+                        <%}%>
+                        
+                        <li> <%=libros[i].titulo%>: $<%=libros[i].precio%></li>
+                    <%}%>
+                    
+                </ul><input type="hidden" name="productos" value="<%=json%>">
             </p>
-            <button type="button" class="btn btn-outline-warning btnSeeBook btn-block">Pagar</button>
+            <button class="btn btn-outline-warning btnSeeBook btn-block" type="submit">Pagar</button>
+            </form>
         </div>
     </div>
     <%}%>

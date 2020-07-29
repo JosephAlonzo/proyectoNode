@@ -95,5 +95,8 @@ exports.login = (req, res) => {
             res.redirect('/login');
         }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+     console.log(err)
+     res.redirect('/login');
+    });
 };
